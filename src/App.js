@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './App.css';
 import App1 from './App1';
 import {
@@ -6,6 +6,8 @@ import {
     Paper
 } from '@material-ui/core';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import NightsStayIcon from '@material-ui/icons/NightsStay';
+import WbSunnyIcon from '@material-ui/icons/WbSunny';
 
 function App() {
     const [theme, setTheme] = useState({
@@ -14,10 +16,25 @@ function App() {
         }
     });
 
+    useEffect(() => {
+        const localTheme = window.localStorage.getItem('theme');
+        localTheme && setTheme({
+            palette: {
+                type: localTheme
+            }
+        });
+    }, []);
+
     // we change the palette type of the theme in state
     const toggleDarkTheme = () => {
-        let newPaletteType = theme.palette.type === "light" ? "dark" : "light";
-        console.log('newPaletteType:', newPaletteType)
+        let newPaletteType;
+        if (theme.palette.type === "light") {
+            window.localStorage.setItem('theme', 'dark')
+            newPaletteType = 'dark';
+        } else {
+            window.localStorage.setItem('theme', 'light')
+            newPaletteType = 'light';
+        }
         setTheme({
             palette: {
                 type: newPaletteType
@@ -31,15 +48,18 @@ function App() {
 
     return (
         <ThemeProvider theme={muiTheme}>
-            <Paper style={{height: '100vh',borderRadius: 'unset'}}>
-            <App1/>
-            <Switch
-                checked={theme.palette.type === 'dark'}
-                onChange={toggleDarkTheme}
-                name="checkedA"
-                inputProps={{ 'aria-label': 'secondary checkbox' }}
-                title={theme.palette.type === 'dark' ? 'Switch light mode' : 'Switch dark mode'}
-            />
+            <Paper style={{ height: '100vh', borderRadius: 'unset' }}>
+                <App1 />
+                <Switch
+                    checked={theme.palette.type === 'dark' ? true : false}
+                    checkedIcon={<NightsStayIcon />} 
+                    icon={<WbSunnyIcon />}
+                    onChange={toggleDarkTheme}
+                    name="checkedA"
+                    inputProps={{ 'aria-label': 'secondary checkbox' }}
+                    title={theme.palette.type === 'dark' ? 'Switch light mode' : 'Switch dark mode'}
+                    className={theme.palette.type === 'dark' ? 'switchIcon' : 'lightIcon'}
+                />
             </Paper>
         </ThemeProvider>
     );

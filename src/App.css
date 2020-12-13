@@ -7,7 +7,7 @@ body {
   height: 160px;
   background-color: powderblue;
   padding: 15px;
-  border: 1px solid rgb(39, 39, 109) ;
+  border: 1px solid rgb(39, 39, 109);
   box-shadow: 2px 6px 12px rgba(0, 0, 0, 2);
   position: absolute;
 }
@@ -25,7 +25,7 @@ body {
   background-color: rgb(39, 39, 109);
   border: none;
   font-size: 28px;
-  color: #FFFFFF;
+  color: #ffffff;
   padding: 20px;
   margin-top: 10px;
   margin-left: 10px;
@@ -40,7 +40,7 @@ body {
 .button1:after {
   content: "";
   background: #f1f1f1;
-  background-color:whitesmoke;
+  background-color: whitesmoke;
   display: block;
   position: absolute;
   padding-top: 300%;
@@ -48,18 +48,18 @@ body {
   margin-left: -20px !important;
   margin-top: -120%;
   opacity: 0;
-  transition: all 0.8s
+  transition: all 0.8s;
 }
 
 .button1:active:after {
   padding: 0;
   margin: 0;
   opacity: 1;
-  transition: 0s
+  transition: 0s;
 }
 
 .button2 {
-  background-color: white; 
+  background-color: white;
   border: none;
   padding: 6px;
   margin: 6px;
@@ -75,22 +75,59 @@ body {
 }
 
 .button2 {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .button2:hover {
-  background-color:  rgb(39, 39, 109);
+  background-color: rgb(39, 39, 109);
   color: white;
 }
 
 .footer {
   font-size: 12px;
-   position: fixed;
-   left: 0;
-   bottom: 0;
-   width: 100%;
-   background-color:whitesmoke;
-   color: black;
-   text-align: center;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: whitesmoke;
+  color: black;
+  text-align: center;
+}
 
+.switchIcon,
+.lightIcon {
+  /* height: 40px !important;
+  width: 63px !important; */
+  height: 55px !important;
+  width: 100px !important;
+  position: absolute !important;
+  top: 0 !important;
+  right: 0 !important;
+}
+
+.switchIcon svg,
+.lightIcon svg {
+  /* width: 20px;
+  height: 15px; */
+  width: 92px;
+  height: 28px;
+  position: relative;
+  top: 4px;
+  left: 1px;
+}
+
+.switchIcon .MuiIconButton-root {
+  padding: 0px !important;
+  top: 9px !important;
+  left: 10px !important;
+  /* left: 7px !important; */
+}
+.lightIcon .MuiIconButton-root {
+  padding: 0px !important;
+  top: 9px !important;
+  left: -15px !important;
+}
+.switchIcon .MuiSwitch-track,
+.lightIcon .MuiSwitch-track {
+  border-radius: 20px;
 }
