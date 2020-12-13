@@ -1,0 +1,96 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+.note {
+  width: 250px;
+  height: 160px;
+  background-color: powderblue;
+  padding: 15px;
+  border: 1px solid rgb(39, 39, 109) ;
+  box-shadow: 2px 6px 12px rgba(0, 0, 0, 2);
+  position: absolute;
+}
+.board {
+  /* background-color: rgb(215, 249, 250); */
+  position: relative;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+}
+
+.button1 {
+  position: relative;
+  background-color: rgb(39, 39, 109);
+  border: none;
+  font-size: 28px;
+  color: #FFFFFF;
+  padding: 20px;
+  margin-top: 10px;
+  margin-left: 10px;
+  width: 200px;
+  text-align: center;
+  transition-duration: 0.4s;
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.button1:after {
+  content: "";
+  background: #f1f1f1;
+  background-color:whitesmoke;
+  display: block;
+  position: absolute;
+  padding-top: 300%;
+  padding-left: 350%;
+  margin-left: -20px !important;
+  margin-top: -120%;
+  opacity: 0;
+  transition: all 0.8s
+}
+
+.button1:active:after {
+  padding: 0;
+  margin: 0;
+  opacity: 1;
+  transition: 0s
+}
+
+.button2 {
+  background-color: white; 
+  border: none;
+  padding: 6px;
+  margin: 6px;
+  font-weight: bold;
+  text-shadow: #f4511e;
+  color: black;
+  text-align: center;
+  text-decoration: black;
+  display: inline-block;
+  cursor: pointer;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+}
+
+.button2 {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.button2:hover {
+  background-color:  rgb(39, 39, 109);
+  color: white;
+}
+
+.footer {
+  font-size: 12px;
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color:whitesmoke;
+   color: black;
+   text-align: center;
+
+}
