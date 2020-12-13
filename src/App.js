@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import './App.css';
-import App1 from './App1';
+import AllNotes from './components/AllNotes';
 import {
-    Switch,
     Paper
 } from '@material-ui/core';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import NightsStayIcon from '@material-ui/icons/NightsStay';
-import WbSunnyIcon from '@material-ui/icons/WbSunny';
+import { ToggleSwitch } from './components/ToggleTheme';
 
 function App() {
     const [theme, setTheme] = useState({
@@ -49,17 +47,8 @@ function App() {
     return (
         <ThemeProvider theme={muiTheme}>
             <Paper style={{ height: '100vh', borderRadius: 'unset' }}>
-                <App1 />
-                <Switch
-                    checked={theme.palette.type === 'dark' ? true : false}
-                    checkedIcon={<NightsStayIcon />} 
-                    icon={<WbSunnyIcon />}
-                    onChange={toggleDarkTheme}
-                    name="checkedA"
-                    inputProps={{ 'aria-label': 'secondary checkbox' }}
-                    title={theme.palette.type === 'dark' ? 'Switch light mode' : 'Switch dark mode'}
-                    className={theme.palette.type === 'dark' ? 'switchIcon' : 'lightIcon'}
-                />
+                <AllNotes />
+                <ToggleSwitch toggleDarkTheme={toggleDarkTheme} theme={theme}/>
             </Paper>
         </ThemeProvider>
     );

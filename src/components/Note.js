@@ -1,6 +1,6 @@
 import React from "react";
 import Draggable from "react-draggable";
-import "./App.css";
+import "../App.css";
 class Note extends React.Component {
   constructor(props) {
     super(props);
