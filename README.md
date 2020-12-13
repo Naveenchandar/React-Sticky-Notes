@@ -8,6 +8,3 @@
   - Material Ui 
 - Packages used
   - react-draggable
-- I have used react-draggable -npm package in this application 
-  - import react-draggable by command :-
-  - $ npm install react-draggable
