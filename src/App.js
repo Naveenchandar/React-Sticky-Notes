@@ -47,8 +47,8 @@ function App() {
     return (
         <ThemeProvider theme={muiTheme}>
             <Paper style={{ height: '100vh', borderRadius: 'unset' }}>
-                <AllNotes />
-                <ToggleSwitch toggleDarkTheme={toggleDarkTheme} theme={theme}/>
+                <AllNotes theme={theme} />
+                <ToggleSwitch toggleDarkTheme={toggleDarkTheme} theme={theme} />
             </Paper>
         </ThemeProvider>
     );

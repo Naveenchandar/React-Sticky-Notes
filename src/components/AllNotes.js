@@ -1,7 +1,7 @@
 import React from 'react';
 import '../App.css';
 import Note from './Note';
-import Button from '@material-ui/core/Button';
+import { Button} from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { Add as AddIcon } from '@material-ui/icons';
 
@@ -29,13 +29,13 @@ class DisplayAllNotes extends React.Component {
   };
 
   currenttime = () => {
-    var today = new Date();
+    let today = new Date();
     //  var time =today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     today = `${today.toLocaleDateString()} ${today.toLocaleTimeString()}`;
     return today;
   }
   add = (text) => {
-    var notes = [
+    let notes = [
       ...this.state.notes,
       {
         id: this.nextId(),
@@ -48,7 +48,7 @@ class DisplayAllNotes extends React.Component {
   };
 
   update = (newText, id) => {
-    var notes = this.state.notes.map((note) =>
+    let notes = this.state.notes.map((note) =>
       note.id !== id
         ? note
         : {
@@ -60,13 +60,12 @@ class DisplayAllNotes extends React.Component {
   };
 
   remove = (id) => {
-    var notes = this.state.notes.filter((note) => note.id !== id);
+    let notes = this.state.notes.filter((note) => note.id !== id);
     this.setState({ notes });
   };
 
   eachNote = (note) => {
     return (
-      console.log(note),
       (
         <Note
           key={note.id}
@@ -75,7 +74,9 @@ class DisplayAllNotes extends React.Component {
           onRemove={this.remove}
           note={note.note}
           time={note.time}
-        ></Note>
+          theme={this.props.theme}
+          onAdd={this.add}
+        />
       )
     );
   };

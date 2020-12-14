@@ -10,6 +10,8 @@ body {
   border: 1px solid rgb(39, 39, 109);
   box-shadow: 2px 6px 12px rgba(0, 0, 0, 2);
   position: absolute;
+  padding: 0;
+  width: 300px;
 }
 .board {
   /* background-color: rgb(215, 249, 250); */
@@ -130,4 +132,24 @@ body {
 .switchIcon .MuiSwitch-track,
 .lightIcon .MuiSwitch-track {
   border-radius: 20px;
+}
+
+.notes-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+.notes-footer {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 5px;
+}
+
+#note {
+  background: powderblue;
+}
+
+.note-icon {
+  cursor: pointer;
 }

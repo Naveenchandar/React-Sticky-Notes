@@ -1,12 +1,23 @@
 import React from "react";
 import Draggable from "react-draggable";
 import "../App.css";
+import {
+  Add as AddIcon,
+  Close as CloseIcon,
+  FormatBold as FormatBoldIcon,
+  FormatItalic as FormatItalicIcon,
+  FormatUnderlined as FormatUnderlinedIcon,
+  StrikethroughS as StrikethroughSIcon,
+  FormatListBulleted as FormatListBulletedIcon,
+  InsertPhotoOutlined as InsertPhotoOutlinedIcon
+} from '@material-ui/icons';
 class Note extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       addText: false,
     };
+    this.myRef = React.createRef();
   }
 
   componentWillMount = () => {
@@ -16,13 +27,16 @@ class Note extends React.Component {
     };
   };
 
+  componentDidMount(){
+    this.myRef.current.focus()
+  }
+
   randomBetween = (x, y, s) => {
     return x + Math.ceil(Math.random() * (y - x)) + s;
   };
 
   save = () => {
-    // @ts-ignore
-    this.props.onChange(this.refs.newText.value, this.props.id);
+    this.props.onChange(this.myRef.current.value, this.props.id);
     this.setState({ addText: false });
   };
   edit = () => {
@@ -36,21 +50,34 @@ class Note extends React.Component {
   AddNote = () => {
     return (
       <div className="note" style={this.style}>
-        <textarea
-          ref="newText"
-          style={{ width: 241, height: 122, margin: 0 }}
-          placeholder="Enter a note here."
-        ></textarea>
-        <button className="button2" onClick={this.save}>
+        <div id='note' style={ this.props.theme === 'light' ? {backgroundColor: '#ffffff'} : {backgroundColor: '#424242'}}>
+          <div className='notes-header'>
+            <AddIcon className='note-icon' onClick={this.props.onAdd} titleAccess='New note'/>
+            <CloseIcon className='note-icon' onClick={this.delete} titleAccess='Close note'/>
+          </div>
+          <textarea
+            ref={this.myRef}
+            style={{ width: 295, height: 250, margin: 0, border: 'unset',outline: 'unset' }}
+            placeholder="Take a note here..."
+            onBlur={this.save}
+          ></textarea>
+          <div className='notes-footer'>
+            <FormatBoldIcon className='note-icon' titleAccess='Bold'/>
+            <FormatItalicIcon className='note-icon' titleAccess='Italic'/>
+            <FormatUnderlinedIcon className='note-icon' titleAccess='Underline'/>
+            <StrikethroughSIcon className='note-icon' titleAccess='Strikethrough'/>
+            <FormatListBulletedIcon className='note-icon' titleAccess='Toggle Bullets'/>
+            <InsertPhotoOutlinedIcon className='note-icon' titleAccess='Add Image'/>
+          </div>
+        </div>
+        {/* <button className="button2" onClick={this.save}>
           Add Text
-        </button>
+        </button> */}
       </div>
     );
   };
 
   AddTextOrNot = () => {
-    console.log("called");
-
     return (
       <button className="button2" onClick={this.edit}>
         Add Text
@@ -62,11 +89,10 @@ class Note extends React.Component {
     return (
       <div className="note" style={this.style}>
         <p>{this.props.note}</p>
-        {console.log("note = >" + this.props.note)}
         <span>
-          <button className="button2" onClick={this.delete}>
+          {/* <button className="button2" onClick={this.delete}>
             Delete Note
-          </button>
+          </button> */}
           {this.AddTextOrNot()}
         </span>
 
@@ -82,7 +108,7 @@ class Note extends React.Component {
   render() {
     return (
       <Draggable>
-        {this.state.addText ? this.AddNote() : this.DisplayNote()}
+        {this.AddNote()}
       </Draggable>
     );
   }
