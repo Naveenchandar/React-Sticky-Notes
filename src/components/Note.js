@@ -107,9 +107,11 @@ class Note extends React.Component {
 
   render() {
     return (
-      <Draggable>
+      <div style={{height: '70vh', padding: '10px'}}>
+      <Draggable bounds="parent" >
         {this.AddNote()}
       </Draggable>
+      </div>
     );
   }
 }
