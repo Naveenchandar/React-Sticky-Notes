@@ -24,6 +24,7 @@ class DisplayAllNotes extends React.Component {
       focusNoteId: 0,
     };
   }
+  
   nextId = () => {
     this.uniqueId = this.uniqueId || 0;
     return this.uniqueId++;
@@ -35,6 +36,7 @@ class DisplayAllNotes extends React.Component {
     today = `${today.toLocaleDateString()} ${today.toLocaleTimeString()}`;
     return today;
   }
+
   add = (text) => {
     let notes = [
       ...this.state.notes,
@@ -45,7 +47,7 @@ class DisplayAllNotes extends React.Component {
       },
     ];
     this.setState({ notes });
-    // this.props.toggleDarkTheme();
+    window.localStorage.setItem('notes', JSON.stringify(notes));
   };
 
   update = (newText, id) => {
