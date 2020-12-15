@@ -51,15 +51,17 @@ class Note extends React.Component {
     return (
       <div className="note" style={this.style}>
         <div id='note' style={ this.props.theme === 'light' ? {backgroundColor: '#ffffff'} : {backgroundColor: '#424242'}}>
+          {this.props.focusNoteId === this.props.id ? 
           <div className='notes-header'>
             <AddIcon className='note-icon' onClick={this.props.onAdd} titleAccess='New note'/>
             <CloseIcon className='note-icon' onClick={this.delete} titleAccess='Close note'/>
-          </div>
+          </div> : ''}
           <textarea
             ref={this.myRef}
             style={{ width: 295, height: 250, margin: 0, border: 'unset',outline: 'unset' }}
             placeholder="Take a note here..."
             onBlur={this.save}
+            onFocus={()=>this.props.noteFocus(this.props.id)}
           ></textarea>
           <div className='notes-footer'>
             <FormatBoldIcon className='note-icon' titleAccess='Bold'/>

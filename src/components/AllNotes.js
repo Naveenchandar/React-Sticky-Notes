@@ -1,7 +1,7 @@
 import React from 'react';
 import '../App.css';
 import Note from './Note';
-import { Button} from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { Add as AddIcon } from '@material-ui/icons';
 
@@ -9,7 +9,7 @@ const useStyles = ((theme) => ({
   button: {
     margin: theme.spacing(1),
     backgroundColor: '#5de2a3',
-    '&:hover':{
+    '&:hover': {
       color: '#5de2a3',
       backgroundColor: 'transparent'
     }
@@ -21,6 +21,7 @@ class DisplayAllNotes extends React.Component {
     super(props);
     this.state = {
       notes: [],
+      focusNoteId: 0,
     };
   }
   nextId = () => {
@@ -64,9 +65,15 @@ class DisplayAllNotes extends React.Component {
     this.setState({ notes });
   };
 
+  noteFocus = (id) => {
+    this.setState({
+      focusNoteId: id
+    })
+  }
+
   eachNote = (note) => {
-    return (
-      (
+    if (note.id === this.state.focusNoteId) {
+      return (
         <Note
           key={note.id}
           id={note.id}
@@ -76,25 +83,47 @@ class DisplayAllNotes extends React.Component {
           time={note.time}
           theme={this.props.theme}
           onAdd={this.add}
+          noteFocus={this.noteFocus}
+          focusNoteId={this.state.focusNoteId}
         />
       )
-    );
+    } else {
+      return (
+        (
+          <Note
+            key={note.id}
+            id={note.id}
+            onChange={this.update}
+            onRemove={this.remove}
+            note={note.note}
+            time={note.time}
+            theme={this.props.theme}
+            onAdd={this.add}
+            noteFocus={this.noteFocus}
+            focusNoteId={this.state.focusNoteId}
+          />
+        )
+      );
+    }
   };
 
   render() {
     const { classes } = this.props;
     return (
       <div className="board">
-        <Button
-          variant="contained"
-          color="primary"
-          className={classes.button}
-          onClick={() => this.add()}
-          startIcon={<AddIcon />}
-        >
-          Add a Note
+        {this.state.notes && this.state.notes.length > 0 ?
+          this.state.notes.map(this.eachNote)
+          :
+          <Button
+            variant="contained"
+            color="primary"
+            className={classes.button}
+            onClick={() => this.add()}
+            startIcon={<AddIcon />}
+          >
+            Add a Note
       </Button>
-        {this.state.notes.map(this.eachNote)}
+        }
       </div>
     );
   }
