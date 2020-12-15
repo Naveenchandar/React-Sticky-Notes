@@ -20,11 +20,28 @@ class DisplayAllNotes extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      notes: [],
+      notes: this.props.storedNotes,
       focusNoteId: 0,
+      storedNotes: []
     };
   }
-  
+
+  componentDidMount(){
+    this.getData();
+  }
+
+  getData(){
+    setTimeout(()=>{
+      this.setState((prevState)=>({
+        notes: this.props.storedNotes
+      }),()=>{
+        this.setState({notes:this.props.storedNotes})
+        console.log('callback',this.state.notes);
+        this.eachNote(this.state.notes);
+      })
+    },1000)
+  }
+
   nextId = () => {
     this.uniqueId = this.uniqueId || 0;
     return this.uniqueId++;
@@ -42,12 +59,11 @@ class DisplayAllNotes extends React.Component {
       ...this.state.notes,
       {
         id: this.nextId(),
-        note: text,
+        note: '',
         time: this.currenttime(),
       },
     ];
     this.setState({ notes });
-    window.localStorage.setItem('notes', JSON.stringify(notes));
   };
 
   update = (newText, id) => {
@@ -60,6 +76,7 @@ class DisplayAllNotes extends React.Component {
         }
     );
     this.setState({ notes });
+    window.localStorage.setItem('notes', JSON.stringify(notes));
   };
 
   remove = (id) => {
@@ -114,16 +131,16 @@ class DisplayAllNotes extends React.Component {
     return (
       <div className="board">
         {this.state.notes && this.state.notes.length > 0 ?
-          this.state.notes.map(this.eachNote)
-          :
-          <Button
-            variant="contained"
-            color="primary"
-            className={classes.button}
-            onClick={() => this.add()}
-            startIcon={<AddIcon />}
-          >
-            Add a Note
+            this.state.notes.map(this.eachNote)
+            :
+            <Button
+              variant="contained"
+              color="primary"
+              className={classes.button}
+              onClick={() => this.add()}
+              startIcon={<AddIcon />}
+            >
+              Add a Note
       </Button>
         }
       </div>

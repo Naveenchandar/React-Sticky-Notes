@@ -16,6 +16,7 @@ class Note extends React.Component {
     super(props);
     this.state = {
       addText: false,
+      value:this.props.note
     };
     this.myRef = React.createRef();
   }
@@ -47,6 +48,10 @@ class Note extends React.Component {
     this.props.onRemove(this.props.id);
   };
 
+  handleChange = (event) => {
+    this.setState({value: event.target.value});
+  }
+
   AddNote = () => {
     return (
       <div className="note" style={this.style}>
@@ -62,6 +67,7 @@ class Note extends React.Component {
             placeholder="Take a note here..."
             onBlur={this.save}
             onFocus={()=>this.props.noteFocus(this.props.id)}
+            value={this.state.value} onChange={this.handleChange}
           ></textarea>
           <div className='notes-footer'>
             <FormatBoldIcon className='note-icon' titleAccess='Bold'/>

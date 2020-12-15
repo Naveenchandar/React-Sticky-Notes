@@ -13,14 +13,18 @@ function App() {
             type: "light"
         }
     });
+    const [storedNotes,setStoredNotes] = React.useState([]);
 
     useEffect(() => {
         const localTheme = window.localStorage.getItem('theme');
+        let localNotes = window.localStorage.getItem('notes');
         localTheme && setTheme({
             palette: {
                 type: localTheme
             }
         });
+        localNotes = JSON.parse(localNotes);
+        localNotes && setStoredNotes(localNotes)
     }, []);
 
     // we change the palette type of the theme in state
@@ -43,11 +47,10 @@ function App() {
     // we generate a MUI-theme from state's theme object
     const muiTheme = createMuiTheme(theme);
     // console.log('#' + Math.floor(Math.random() * 16777215).toString(16));
-
     return (
         <ThemeProvider theme={muiTheme}>
             <Paper style={{ height: '100vh', borderRadius: 'unset' }}>
-                <AllNotes theme={theme} />
+                <AllNotes theme={theme} storedNotes={storedNotes} />
                 <ToggleSwitch toggleDarkTheme={toggleDarkTheme} theme={theme} />
             </Paper>
         </ThemeProvider>
