@@ -9,7 +9,8 @@ import {
   FormatUnderlined as FormatUnderlinedIcon,
   StrikethroughS as StrikethroughSIcon,
   FormatListBulleted as FormatListBulletedIcon,
-  InsertPhotoOutlined as InsertPhotoOutlinedIcon
+  InsertPhotoOutlined as InsertPhotoOutlinedIcon,
+  MoreHoriz as MoreHorizIcon
 } from '@material-ui/icons';
 class Note extends React.Component {
   constructor(props) {
@@ -81,7 +82,10 @@ class Note extends React.Component {
           {this.props.focusNoteId === this.props.id ? 
           <div className='notes-header'>
             <AddIcon className='note-icon' onClick={this.props.onAdd} titleAccess='New note'/>
-            <CloseIcon className='note-icon' onClick={this.delete} titleAccess='Close note'/>
+            <div>
+              <MoreHorizIcon titleAccess='Menu' className='note-icon'/>
+              <CloseIcon className='note-icon' onClick={this.delete} titleAccess='Close note'/>
+            </div>
           </div> : ''}
           <textarea
             ref={this.myRef}
