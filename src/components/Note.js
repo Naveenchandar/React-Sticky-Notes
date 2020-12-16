@@ -13,6 +13,7 @@ import {
   MoreHoriz as MoreHorizIcon
 } from '@material-ui/icons';
 import SimplePopover from './menu';
+
 class Note extends React.Component {
   constructor(props) {
     super(props);
@@ -43,6 +44,7 @@ class Note extends React.Component {
     this.props.onChange(this.myRef.current.value, this.props.id);
     this.setState({ addText: false });
   };
+
   edit = () => {
     this.setState({ addText: true });
   };
@@ -89,6 +91,13 @@ class Note extends React.Component {
     })
   }
 
+  handleFocusTextArea = () => {
+    this.setState({
+      toggleMenuDialog: false
+    })
+    this.props.noteFocus(this.props.id)
+  }
+
   AddNote = () => {
     return (
       <div className="note" style={this.style}>
@@ -97,36 +106,38 @@ class Note extends React.Component {
           style={this.props.theme === 'light' ? { backgroundColor: '#ffffff' } : { backgroundColor: '#424242' }}
         >
           {this.props.focusNoteId === this.props.id ?
-            <div className='notes-header'>
-              <AddIcon
-                className='note-icon'
-                onClick={this.props.onAdd}
-                titleAccess='New note'
-              />
-              <div>
-                <MoreHorizIcon
-                  titleAccess='Menu'
+            this.state.toggleMenuDialog ?
+              <SimplePopover />
+              :
+              <div className='notes-header'>
+                <AddIcon
                   className='note-icon'
-                  onClick={this.handleMenuIcon}
-                  onBlur={this.handleCloseMenuIcon}
+                  onClick={this.props.onAdd}
+                  titleAccess='New note'
                 />
-                {this.state.toggleMenuDialog ? <SimplePopover /> : ''}
-                <CloseIcon
-                  className='note-icon'
-                  onClick={this.delete}
-                  titleAccess='Close note'
-                />
+                <div>
+                  <MoreHorizIcon
+                    titleAccess='Menu'
+                    className='note-icon'
+                    onClick={this.handleMenuIcon}
+                    onBlur={this.handleCloseMenuIcon}
+                  />
+                  <CloseIcon
+                    className='note-icon'
+                    onClick={this.delete}
+                    titleAccess='Close note'
+                  />
+                </div>
               </div>
-            </div>
             : ''}
 
           <textarea
             ref={this.myRef}
-            style={{ width: 295, height: 250, margin: 0, border: 'unset', outline: 'unset' }}
             placeholder="Take a note here..."
             onBlur={this.save}
-            onFocus={() => this.props.noteFocus(this.props.id)}
-            value={this.state.value} onChange={this.handleChange}
+            onFocus={this.handleFocusTextArea}
+            value={this.state.value} 
+            onChange={this.handleChange}
           ></textarea>
 
           <div className='notes-footer'>

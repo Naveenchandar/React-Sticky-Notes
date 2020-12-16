@@ -153,3 +153,62 @@ body {
 .note-icon {
   cursor: pointer;
 }
+
+.colors {
+  display: flex;
+  flex-direction: row;
+}
+
+.color-name {
+  height: 45px;
+  width: 46px;
+  cursor: pointer;
+}
+
+.yellow:hover,
+.green:hover,
+.pink:hover,
+.purple:hover,
+.blue:hover,
+.gray:hover,
+.charcoal:hover {
+  box-shadow: inset 0 2px 7px rgb(155 144 144 / 60%);
+}
+
+.yellow {
+  background-color: yellow;
+}
+
+.green {
+  background-color: green;
+}
+
+.pink {
+  background-color: pink;
+}
+
+.purple {
+  background-color: purple;
+}
+
+.blue {
+  background-color: blue;
+}
+
+.gray {
+  background-color: gray;
+}
+
+.charcoal {
+  background-color: black;
+}
+
+textarea {
+  width: 295px;
+  height: 250px;
+  margin: 0;
+  border: unset;
+  outline: unset;
+  padding-top: 5px;
+  padding-left: 5px;
+}
