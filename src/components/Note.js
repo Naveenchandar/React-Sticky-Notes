@@ -51,6 +51,22 @@ class Note extends React.Component {
   handleChange = (event) => {
     this.setState({value: event.target.value});
   }
+  
+  handleTextChange = (textType) => {
+    console.log('textType:', textType)
+    switch(textType){
+      case 'bold':
+        this.myRef.current.style.fontWeight = "bold";
+        break;
+      case 'italic':
+        this.myRef.current.style.fontStyle = "italic";
+        break;
+      case 'underline':
+        this.myRef.current.style.textDecoration = "underline";
+        break;
+
+    }
+  }
 
   AddNote = () => {
     return (
@@ -70,12 +86,12 @@ class Note extends React.Component {
             value={this.state.value} onChange={this.handleChange}
           ></textarea>
           <div className='notes-footer'>
-            <FormatBoldIcon className='note-icon' titleAccess='Bold'/>
-            <FormatItalicIcon className='note-icon' titleAccess='Italic'/>
-            <FormatUnderlinedIcon className='note-icon' titleAccess='Underline'/>
-            <StrikethroughSIcon className='note-icon' titleAccess='Strikethrough'/>
-            <FormatListBulletedIcon className='note-icon' titleAccess='Toggle Bullets'/>
-            <InsertPhotoOutlinedIcon className='note-icon' titleAccess='Add Image'/>
+            <FormatBoldIcon className='note-icon' titleAccess='Bold' onClick={()=>this.handleTextChange('bold')}/>
+            <FormatItalicIcon className='note-icon' titleAccess='Italic' onClick={()=>this.handleTextChange('italic')}/>
+            <FormatUnderlinedIcon className='note-icon' titleAccess='Underline' onClick={()=>this.handleTextChange('underline')}/>
+            <StrikethroughSIcon className='note-icon' titleAccess='Strikethrough' onClick={()=>this.handleTextChange('strike')}/>
+            <FormatListBulletedIcon className='note-icon' titleAccess='Toggle Bullets' onClick={()=>this.handleTextChange('bullet')}/>
+            {/* <InsertPhotoOutlinedIcon className='note-icon' titleAccess='Add Image'/> */}
           </div>
         </div>
         {/* <button className="button2" onClick={this.save}>
