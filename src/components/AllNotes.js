@@ -26,20 +26,20 @@ class DisplayAllNotes extends React.Component {
     };
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.getData();
   }
 
-  getData(){
-    setTimeout(()=>{
-      this.setState((prevState)=>({
+  getData() {
+    setTimeout(() => {
+      this.setState((prevState) => ({
         notes: this.props.storedNotes
-      }),()=>{
-        this.setState({notes:this.props.storedNotes})
-        console.log('callback',this.state.notes);
+      }), () => {
+        this.setState({ notes: this.props.storedNotes })
+        console.log('callback', this.state.notes);
         this.eachNote(this.state.notes);
       })
-    },1000)
+    }, 1000)
   }
 
   nextId = () => {
@@ -131,16 +131,16 @@ class DisplayAllNotes extends React.Component {
     return (
       <div className="board">
         {this.state.notes && this.state.notes.length > 0 ?
-            this.state.notes.map(this.eachNote)
-            :
-            <Button
-              variant="contained"
-              color="primary"
-              className={classes.button}
-              onClick={() => this.add()}
-              startIcon={<AddIcon />}
-            >
-              Add a Note
+          this.state.notes.map(this.eachNote)
+          :
+          <Button
+            variant="contained"
+            color="primary"
+            className={classes.button}
+            onClick={() => this.add()}
+            startIcon={<AddIcon />}
+          >
+            Add a Note
       </Button>
         }
       </div>

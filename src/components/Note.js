@@ -12,12 +12,14 @@ import {
   InsertPhotoOutlined as InsertPhotoOutlinedIcon,
   MoreHoriz as MoreHorizIcon
 } from '@material-ui/icons';
+import SimplePopover from './menu';
 class Note extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       addText: false,
-      value:this.props.note
+      value: this.props.note,
+      toggleMenuDialog: false
     };
     this.myRef = React.createRef();
   }
@@ -29,7 +31,7 @@ class Note extends React.Component {
     };
   };
 
-  componentDidMount(){
+  componentDidMount() {
     this.myRef.current.focus()
   }
 
@@ -50,12 +52,12 @@ class Note extends React.Component {
   };
 
   handleChange = (event) => {
-    this.setState({value: event.target.value});
+    this.setState({ value: event.target.value });
   }
-  
+
   handleTextChange = (textType) => {
     console.log('textType:', textType)
-    switch(textType){
+    switch (textType) {
       case 'bold':
         this.myRef.current.style.fontWeight = "bold";
         break;
@@ -75,32 +77,84 @@ class Note extends React.Component {
     }
   }
 
+  handleMenuIcon = () => {
+    this.setState({
+      toggleMenuDialog: true
+    })
+  }
+
+  handleCloseMenuIcon = () => {
+    this.setState({
+      toggleMenuDialog: false
+    })
+  }
+
   AddNote = () => {
     return (
       <div className="note" style={this.style}>
-        <div id='note' style={ this.props.theme === 'light' ? {backgroundColor: '#ffffff'} : {backgroundColor: '#424242'}}>
-          {this.props.focusNoteId === this.props.id ? 
-          <div className='notes-header'>
-            <AddIcon className='note-icon' onClick={this.props.onAdd} titleAccess='New note'/>
-            <div>
-              <MoreHorizIcon titleAccess='Menu' className='note-icon'/>
-              <CloseIcon className='note-icon' onClick={this.delete} titleAccess='Close note'/>
+        <div
+          id='note'
+          style={this.props.theme === 'light' ? { backgroundColor: '#ffffff' } : { backgroundColor: '#424242' }}
+        >
+          {this.props.focusNoteId === this.props.id ?
+            <div className='notes-header'>
+              <AddIcon
+                className='note-icon'
+                onClick={this.props.onAdd}
+                titleAccess='New note'
+              />
+              <div>
+                <MoreHorizIcon
+                  titleAccess='Menu'
+                  className='note-icon'
+                  onClick={this.handleMenuIcon}
+                  onBlur={this.handleCloseMenuIcon}
+                />
+                {this.state.toggleMenuDialog ? <SimplePopover /> : ''}
+                <CloseIcon
+                  className='note-icon'
+                  onClick={this.delete}
+                  titleAccess='Close note'
+                />
+              </div>
             </div>
-          </div> : ''}
+            : ''}
+
           <textarea
             ref={this.myRef}
-            style={{ width: 295, height: 250, margin: 0, border: 'unset',outline: 'unset' }}
+            style={{ width: 295, height: 250, margin: 0, border: 'unset', outline: 'unset' }}
             placeholder="Take a note here..."
             onBlur={this.save}
-            onFocus={()=>this.props.noteFocus(this.props.id)}
+            onFocus={() => this.props.noteFocus(this.props.id)}
             value={this.state.value} onChange={this.handleChange}
           ></textarea>
+
           <div className='notes-footer'>
-            <FormatBoldIcon className='note-icon' titleAccess='Bold' onClick={()=>this.handleTextChange('bold')}/>
-            <FormatItalicIcon className='note-icon' titleAccess='Italic' onClick={()=>this.handleTextChange('italic')}/>
-            <FormatUnderlinedIcon className='note-icon' titleAccess='Underline' onClick={()=>this.handleTextChange('underline')}/>
-            <StrikethroughSIcon className='note-icon' titleAccess='Strikethrough' onClick={()=>this.handleTextChange('strike')}/>
-            <FormatListBulletedIcon className='note-icon' titleAccess='Toggle Bullets' onClick={()=>this.handleTextChange('bullet')}/>
+            <FormatBoldIcon
+              className='note-icon'
+              titleAccess='Bold'
+              onClick={() => this.handleTextChange('bold')}
+            />
+            <FormatItalicIcon
+              className='note-icon'
+              titleAccess='Italic'
+              onClick={() => this.handleTextChange('italic')}
+            />
+            <FormatUnderlinedIcon
+              className='note-icon'
+              titleAccess='Underline'
+              onClick={() => this.handleTextChange('underline')}
+            />
+            <StrikethroughSIcon
+              className='note-icon'
+              titleAccess='Strikethrough'
+              onClick={() => this.handleTextChange('strike')}
+            />
+            <FormatListBulletedIcon
+              className='note-icon'
+              titleAccess='Toggle Bullets'
+              onClick={() => this.handleTextChange('bullet')}
+            />
             {/* <InsertPhotoOutlinedIcon className='note-icon' titleAccess='Add Image'/> */}
           </div>
         </div>
@@ -141,10 +195,10 @@ class Note extends React.Component {
 
   render() {
     return (
-      <div style={{height: '70vh', padding: '10px'}}>
-      <Draggable bounds="parent" >
-        {this.AddNote()}
-      </Draggable>
+      <div style={{ height: '70vh', padding: '10px' }}>
+        <Draggable bounds="parent" >
+          {this.AddNote()}
+        </Draggable>
       </div>
     );
   }
