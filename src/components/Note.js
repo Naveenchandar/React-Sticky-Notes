@@ -20,7 +20,8 @@ class Note extends React.Component {
     this.state = {
       addText: false,
       value: this.props.note,
-      toggleMenuDialog: false
+      toggleMenuDialog: false,
+      headerBgColor: ''
     };
     this.myRef = React.createRef();
   }
@@ -58,7 +59,6 @@ class Note extends React.Component {
   }
 
   handleTextChange = (textType) => {
-    console.log('textType:', textType)
     switch (textType) {
       case 'bold':
         this.myRef.current.style.fontWeight = "bold";
@@ -98,6 +98,20 @@ class Note extends React.Component {
     this.props.noteFocus(this.props.id)
   }
 
+  handleChangeColor = (color) => {
+    if (color) {
+      this.setState({
+        headerBgColor: color,
+        toggleMenuDialog: false
+      })
+    } else {
+      const headerBgColor = this.props.theme === 'light' ? '#ffffff' : '#424242';
+      this.setState({
+        headerBgColor
+      })
+    }
+  }
+
   AddNote = () => {
     return (
       <div className="note" style={this.style}>
@@ -107,9 +121,9 @@ class Note extends React.Component {
         >
           {this.props.focusNoteId === this.props.id ?
             this.state.toggleMenuDialog ?
-              <SimplePopover />
+              <SimplePopover handleChangeColor={this.handleChangeColor} />
               :
-              <div className='notes-header'>
+              <div className='notes-header' style={{ backgroundColor: this.state.headerBgColor }}>
                 <AddIcon
                   className='note-icon'
                   onClick={this.props.onAdd}
@@ -136,7 +150,7 @@ class Note extends React.Component {
             placeholder="Take a note here..."
             onBlur={this.save}
             onFocus={this.handleFocusTextArea}
-            value={this.state.value} 
+            value={this.state.value}
             onChange={this.handleChange}
           ></textarea>
 
