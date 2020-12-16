@@ -64,6 +64,12 @@ class Note extends React.Component {
       case 'underline':
         this.myRef.current.style.textDecoration = "underline";
         break;
+      case 'strike':
+        this.myRef.current.style.textDecoration = "line-through";
+        break;
+      default:
+        this.myRef.current.style.fontStyle = "normal";
+        break;
 
     }
   }
