@@ -7,7 +7,9 @@ import {
     Typography,
     Divider,
     Box,
-    Button
+    Button,
+    ListItem,
+    ListItemText
 } from '@material-ui/core';
 import {
     Add as AddIcon,
@@ -43,6 +45,28 @@ const useStyles = makeStyles((theme) => ({
             color: '#5de2a3',
             backgroundColor: 'transparent'
         }
+    },
+    notesList: {
+        marginTop: 5,
+        marginBottom: 5,
+        '& li': {
+            '& div': {
+                '& span': {
+                    fontSize: '10px',
+                    textAlign: 'center',
+                    marginTop: '-14px',
+                    marginBottom: '10px'
+                }
+            }
+        },
+        '& .MuiListItem-gutters':{
+            paddingLeft: '0 !important',
+            paddingRight: '0 !important'
+        }
+    },
+    itemBorder:{
+        borderBottom: '1px solid black',
+        width: '20%'
     }
 }));
 
@@ -57,6 +81,26 @@ export default function NotesList({ notes }) {
     const handleDrawerClose = () => {
         setOpen(false);
     };
+
+    const loadNotesList = (notes) => {
+        if (notes && notes.length > 0) {
+            return notes.map((item, i) => {
+                return (
+                    <List className={classes.notesList}>
+                        <ListItem alignItems="flex-start">
+                            <Box component='div' className={classes.itemBorder} />
+                            <ListItemText
+                                primary={item.time}
+                                secondary={item.note}
+                            />
+                            <Box component='div' className={classes.itemBorder} />
+                        </ListItem>
+                        <Divider />
+                    </List>
+                )
+            })
+        }
+    }
 
     return (
         <div className={classes.root}>
@@ -81,8 +125,9 @@ export default function NotesList({ notes }) {
                 <Divider />
                 <List>
                     <Typography variant='h5'>Sticky Notes</Typography>
+                    <Divider />
                     <Box component='div'>
-
+                        {loadNotesList(notes)}
                     </Box>
                 </List>
                 <Divider />
