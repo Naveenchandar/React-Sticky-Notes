@@ -4,6 +4,7 @@ import Note from './Note';
 import { Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { Add as AddIcon } from '@material-ui/icons';
+import NotesList from './list';
 
 const useStyles = ((theme) => ({
   button: {
@@ -143,6 +144,7 @@ class DisplayAllNotes extends React.Component {
             Add a Note
       </Button>
         }
+        <NotesList notes={this.state.notes}/>
       </div>
     );
   }
