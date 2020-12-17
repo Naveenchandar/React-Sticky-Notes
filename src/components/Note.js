@@ -28,8 +28,8 @@ class Note extends React.Component {
 
   componentWillMount = () => {
     this.style = {
-      right: this.randomBetween(0, window.innerWidth - 150, "px"),
-      top: this.randomBetween(0, window.innerHeight - 150, "px"),
+      right: this.randomBetween(0, window.innerWidth - 200, "px"),
+      top: this.randomBetween(0, window.innerHeight - 200, "px"),
     };
   };
 
@@ -42,7 +42,7 @@ class Note extends React.Component {
   };
 
   save = () => {
-    this.props.onChange(this.myRef.current.value, this.props.id);
+    this.props.onChange(this.myRef.current.value, this.props.id,this.state.headerBgColor);
     this.setState({ addText: false });
   };
 
@@ -123,7 +123,7 @@ class Note extends React.Component {
             this.state.toggleMenuDialog ?
               <SimplePopover handleChangeColor={this.handleChangeColor} />
               :
-              <div className='notes-header' style={{ backgroundColor: this.state.headerBgColor }}>
+              <div className='notes-header' style={{ backgroundColor: this.props.color ? this.props.color : this.state.headerBgColor }}>
                 <AddIcon
                   className='note-icon'
                   onClick={this.props.onAdd}

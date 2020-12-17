@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import {
     Drawer,
     Toolbar,
@@ -24,7 +24,6 @@ const useStyles = makeStyles((theme) => ({
         top: '18px'
     },
     drawer: {
-        width: drawerWidth,
         flexShrink: 0,
     },
     drawerPaper: {
@@ -75,12 +74,13 @@ const useStyles = makeStyles((theme) => ({
         position: 'relative',
         left: '0px',
     },
-    notePara:{
+    notePara: {
         fontSize: '15px !important'
     }
 }));
 
-export default function NotesList({ notes }) {
+export default function NotesList({ notes, addNote }) {
+    console.log('notes:', notes)
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
 
@@ -98,7 +98,11 @@ export default function NotesList({ notes }) {
                 return (
                     <List className={classes.notesList}>
                         <ListItem alignItems="flex-start">
-                            <Box component='div' className={classes.itemBorder} />
+                            <Box 
+                                component='div' 
+                                className={classes.itemBorder}
+                                style={{ borderBottom: item.color ? `1px solid ${item.color}` : this.state.headerBgColor }}
+                            />
                             <ListItemText
                                 primary={item.time}
                                 secondary={
@@ -114,7 +118,11 @@ export default function NotesList({ notes }) {
                                     </React.Fragment>
                                 }
                             />
-                            <Box component='div' className={classes.itemBorder} />
+                            <Box 
+                                component='div' 
+                                className={classes.itemBorder}
+                                style={{ borderBottom: item.color ? `1px solid ${item.color}` : this.state.headerBgColor }}
+                            />
                         </ListItem>
                     </List>
                 )
@@ -139,7 +147,7 @@ export default function NotesList({ notes }) {
                 }}
             >
                 <div className={classes.drawerHeader}>
-                    <AddIcon className={classes.notesIcon} />
+                    <AddIcon className={classes.notesIcon} onClick={addNote} />
                     <CloseIcon className={classes.notesIcon} onClick={handleDrawerClose} />
                 </div>
                 <List>

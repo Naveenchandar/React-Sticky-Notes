@@ -67,13 +67,14 @@ class DisplayAllNotes extends React.Component {
     this.setState({ notes });
   };
 
-  update = (newText, id) => {
+  update = (newText, id,headerBgColor) => {
     let notes = this.state.notes.map((note) =>
       note.id !== id
         ? note
         : {
           ...note,
           note: newText,
+          color:'yellow'
         }
     );
     this.setState({ notes });
@@ -105,6 +106,7 @@ class DisplayAllNotes extends React.Component {
           onAdd={this.add}
           noteFocus={this.noteFocus}
           focusNoteId={this.state.focusNoteId}
+          color={note.color}
         />
       )
     } else {
@@ -121,6 +123,7 @@ class DisplayAllNotes extends React.Component {
             onAdd={this.add}
             noteFocus={this.noteFocus}
             focusNoteId={this.state.focusNoteId}
+            color={note.color}
           />
         )
       );
@@ -144,7 +147,9 @@ class DisplayAllNotes extends React.Component {
             Add a Note
       </Button>
         }
-        <NotesList notes={this.state.notes}/>
+        {this.state.notes && this.state.notes.length > 0 ?
+        <NotesList notes={this.state.notes} addNote={this.add}/>
+        : ''}
       </div>
     );
   }
