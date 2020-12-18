@@ -42,7 +42,7 @@ class Note extends React.Component {
   };
 
   save = () => {
-    this.props.onChange(this.myRef.current.value, this.props.id,this.state.headerBgColor);
+    this.props.onChange(this.myRef.current.value, this.props.id, this.state.headerBgColor);
     this.setState({ addText: false });
   };
 
@@ -105,7 +105,7 @@ class Note extends React.Component {
         toggleMenuDialog: false
       })
     } else {
-      const headerBgColor = this.props.theme === 'light' ? '#ffffff' : '#424242';
+      const headerBgColor = this.props.theme === 'light' ? 'rgb(93 226 163)' : '#424242';
       this.setState({
         headerBgColor
       })
@@ -117,13 +117,13 @@ class Note extends React.Component {
       <div className="note" style={this.style}>
         <div
           id='note'
-          style={this.props.theme === 'light' ? { backgroundColor: '#ffffff' } : { backgroundColor: '#424242' }}
+          style={{ backgroundColor: this.props.theme.palette.type === 'light' ? 'rgb(93 226 163)' : '#424242' }}
         >
           {this.props.focusNoteId === this.props.id ?
             this.state.toggleMenuDialog ?
-              <SimplePopover handleChangeColor={this.handleChangeColor} />
+              <SimplePopover handleChangeColor={this.handleChangeColor} theme={this.props.theme} />
               :
-              <div className='notes-header' style={{ backgroundColor: this.props.color ? this.props.color : this.state.headerBgColor }}>
+              <div className='notes-header' style={{ backgroundColor: this.state.headerBgColor }}>
                 <AddIcon
                   className='note-icon'
                   onClick={this.props.onAdd}
@@ -154,7 +154,7 @@ class Note extends React.Component {
             onChange={this.handleChange}
           ></textarea>
 
-          <div className='notes-footer'>
+          <div className='notes-footer' style={{ backgroundColor: this.state.headerBgColor }}>
             <FormatBoldIcon
               className='note-icon'
               titleAccess='Bold'
@@ -220,7 +220,7 @@ class Note extends React.Component {
 
   render() {
     return (
-      <div style={{ height: '70vh', padding: '10px' }}>
+      <div style={{ height: '90vh', padding: '10px' }}>
         <Draggable bounds="parent" >
           {this.AddNote()}
         </Draggable>

@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
         // necessary for content to be below app bar
         ...theme.mixins.toolbar,
         justifyContent: 'space-between',
-        minHeight: '50px'
+        minHeight: '50px !important'
     },
     notesListBtn: {
         background: '#5de2a3',
@@ -80,7 +80,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function NotesList({ notes, addNote }) {
-    console.log('notes:', notes)
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
 
@@ -98,10 +97,10 @@ export default function NotesList({ notes, addNote }) {
                 return (
                     <List className={classes.notesList}>
                         <ListItem alignItems="flex-start">
-                            <Box 
-                                component='div' 
+                            <Box
+                                component='div'
                                 className={classes.itemBorder}
-                                style={{ borderBottom: item.color ? `1px solid ${item.color}` : this.state.headerBgColor }}
+                                style={{ borderBottom: item.color ? `1px solid ${item.color}` : '' }}
                             />
                             <ListItemText
                                 primary={item.time}
@@ -118,10 +117,10 @@ export default function NotesList({ notes, addNote }) {
                                     </React.Fragment>
                                 }
                             />
-                            <Box 
-                                component='div' 
+                            <Box
+                                component='div'
                                 className={classes.itemBorder}
-                                style={{ borderBottom: item.color ? `1px solid ${item.color}` : this.state.headerBgColor }}
+                                style={{ borderBottom: item.color ? `1px solid ${item.color}` : '' }}
                             />
                         </ListItem>
                     </List>
@@ -147,11 +146,11 @@ export default function NotesList({ notes, addNote }) {
                 }}
             >
                 <div className={classes.drawerHeader}>
-                    <AddIcon className={classes.notesIcon} onClick={addNote} />
+                    {/* <AddIcon className={classes.notesIcon} onClick={addNote} /> */}
+                    <Typography variant='h5'>Sticky Notes</Typography>
                     <CloseIcon className={classes.notesIcon} onClick={handleDrawerClose} />
                 </div>
                 <List>
-                    <Typography variant='h5'>Sticky Notes</Typography>
                     <Box component='div'>
                         {loadNotesList(notes)}
                     </Box>

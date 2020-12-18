@@ -1,7 +1,7 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default function SimplePopover(props) {
-    
+
     const [bgColor, setBgColor] = useState();
 
     const handleChangeColor = (color) => {
@@ -32,13 +32,13 @@ export default function SimplePopover(props) {
         }
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         props.handleChangeColor(bgColor);
-    },[bgColor])
+    }, [bgColor])
 
 
     return (
-        <div className='colors'>
+        <div className='colors' >
             <span
                 className='color-name yellow'
                 title='Yellow'

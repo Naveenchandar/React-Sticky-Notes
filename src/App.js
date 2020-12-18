@@ -13,7 +13,7 @@ function App() {
             type: "light"
         }
     });
-    const [storedNotes,setStoredNotes] = React.useState([]);
+    const [storedNotes, setStoredNotes] = React.useState([]);
 
     useEffect(() => {
         const localTheme = window.localStorage.getItem('theme');

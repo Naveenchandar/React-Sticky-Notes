@@ -67,14 +67,14 @@ class DisplayAllNotes extends React.Component {
     this.setState({ notes });
   };
 
-  update = (newText, id,headerBgColor) => {
+  update = (newText, id, headerBgColor) => {
     let notes = this.state.notes.map((note) =>
       note.id !== id
         ? note
         : {
           ...note,
           note: newText,
-          color:'yellow'
+          color: headerBgColor
         }
     );
     this.setState({ notes });
@@ -148,8 +148,8 @@ class DisplayAllNotes extends React.Component {
       </Button>
         }
         {this.state.notes && this.state.notes.length > 0 ?
-        <NotesList notes={this.state.notes} addNote={this.add}/>
-        : ''}
+          <NotesList notes={this.state.notes} addNote={this.add} />
+          : ''}
       </div>
     );
   }
