@@ -175,11 +175,11 @@ class Note extends React.Component {
               titleAccess='Strikethrough'
               onClick={() => this.handleTextChange('strike')}
             />
-            <FormatListBulletedIcon
+            {/* <FormatListBulletedIcon
               className='note-icon'
               titleAccess='Toggle Bullets'
               onClick={() => this.handleTextChange('bullet')}
-            />
+            /> */}
             {/* <InsertPhotoOutlinedIcon className='note-icon' titleAccess='Add Image'/> */}
           </div>
         </div>
